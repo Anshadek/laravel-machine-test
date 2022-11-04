@@ -41,7 +41,8 @@ class EmployController extends Controller
                     return $row->phone;
                 })
                 ->addColumn('action', function ($row) {
-                    return getActions($row);
+                    $showUrl = route('employ.show', $row->id);
+                    return getActions($row,$showUrl);
                 })
                 ->rawColumns(['action','name','email','phone'])
                 ->make(true);
@@ -134,9 +135,13 @@ class EmployController extends Controller
      * @param  \App\Models\Employ  $employ
      * @return \Illuminate\Http\Response
      */
-    public function show(Employ $employ)
+    public function show($id)
     {
-        //
+        return view('employ.view', [
+            'employ' => employ::findOrFail($id),
+            'category_name' => 'employ',
+            'page_name' => 'employ',
+        ]);
     }
 
     /**

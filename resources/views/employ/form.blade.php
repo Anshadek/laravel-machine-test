@@ -77,7 +77,7 @@
                             @enderror
                         </div>
                         <div class="col-lg-6 mb-3">
-                            <label for="phone" class="form-label">phone</label>
+                            <label for="phone" class="form-label">Phone</label>
                             <input id="phone" class="form-control @error('phone') border-danger @enderror" name="phone"
                                 placeholder="Phone" value="{{ old('phone', $employ->phone ?? null) }}" type="number" >
                             @error('phone')

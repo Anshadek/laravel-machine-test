@@ -37,7 +37,8 @@ class CompanyController extends Controller
                     return $row->website;
                 })
                 ->addColumn('action', function ($row) {
-                    return getActions($row);
+                    $showUrl = route('company.show', $row->id);
+                    return getActions($row,$showUrl);
                 })
 
                 ->addColumn('logo', function ($row) {
@@ -147,9 +148,13 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show($id)
     {
-        //
+        return view('company.view', [
+            'company' => Company::findOrFail($id),
+            'category_name' => 'company',
+            'page_name' => 'company',
+        ]);
     }
 
     /**
